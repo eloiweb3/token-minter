@@ -1,14 +1,17 @@
+[toolchain]
+
 [features]
 seeds = false
 skip-lint = false
+
 [programs.devnet]
-token_minter = "GMe6HHNcxLr7hnDg4ToN4MdhJj7KKSxATqDANKZJXmwo"
+token_minter = "7ctquMoeUnksYS6doBpqgnEmya2oc7ZCivKCjMhzenwf"
 
 [registry]
 url = "https://api.devnet.solana.com"
 
 [provider]
-cluster = "devnet"
+cluster = "Devnet"
 wallet = "/Users/es/.config/solana/id.json"
 
 [scripts]
