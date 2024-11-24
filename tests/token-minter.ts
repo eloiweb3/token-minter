@@ -89,7 +89,7 @@ describe("NFT_mint", () => {
       ,
     ];
 
-     provider.sendAndConfirm(tx, [ eloi_wallet, user]).then(log);
+    provider.sendAndConfirm(tx, [eloi_wallet, user]).then(log);
   });
 
   it("initToken", async () => {
@@ -102,8 +102,27 @@ describe("NFT_mint", () => {
       tokenMetadataProgram: accountsPublicKeys["token_minter"],
       tokenProgram: accountsPublicKeys["token_program"],
     };
-     program.methods
+    program.methods
       .initToken(metadata)
+      .accounts({ ...accounts })
+      .signers([user])
+      .rpc()
+      .then(confirm)
+      .then(log);
+  });
+
+  it("mintTokens", async () => {
+    const accounts = {
+      associatedTokenProgram: accountsPublicKeys["associated_token_program"],
+      destination: accountsPublicKeys["mint"],
+      mint: accountsPublicKeys["token_minter"],
+      payer: accountsPublicKeys["user"],
+      rent: accountsPublicKeys["user"],
+      systemProgram: accountsPublicKeys["system_program"],
+      tokenProgram: accountsPublicKeys["token_program"],
+    };
+     program.methods
+      .mintTokens(new BN(5))
       .accounts({ ...accounts })
       .signers([user])
       .rpc()
